@@ -21,6 +21,6 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - run: echo "github.ref_name is ${{ github.ref_name }}"
-      - run: echo "version=${{ github.ref_name }}" >> GITHUB_ENV
+      - run: echo "version=${{ github.ref_name }}" >> $GITHUB_ENV
       - run: echo "env var = ${{ env.version }}"
       - run: cat test
