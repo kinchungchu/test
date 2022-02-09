@@ -1,5 +1,5 @@
 
 Name:    Test
-Version: %{version}
+Version: ${version}
 Release: %{release}
 
