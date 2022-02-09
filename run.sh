@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo "Printing version in script: $version"
+echo "Printing version in script: ${version}"
