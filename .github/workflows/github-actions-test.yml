@@ -23,7 +23,7 @@ jobs:
       - run: echo "github.ref_name is ${{ github.ref_name }}"
       - run: echo "version=${{ github.ref_name }}" >> $GITHUB_ENV
       - run: echo "env var = ${{ env.version }}"
-      - run: release=1.0
-      - run: echo "release is $release"
-      - run: echo release is $release
       - run: cat test
+        env: version: ${{ env.version }}
+      - run: cat test
+        env: release: ${{ env.version }}
