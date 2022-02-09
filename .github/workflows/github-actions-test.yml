@@ -24,3 +24,4 @@ jobs:
       - run: echo "version=${{ github.ref_name }}" >> $GITHUB_ENV
       - run: echo "env var = ${{ env.version }}"
       - run: echo "env var $version"
+      - run: ./run.sh
