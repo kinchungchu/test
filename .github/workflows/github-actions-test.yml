@@ -23,7 +23,7 @@ jobs:
       - run: echo "github.ref_name is ${{ github.ref_name }}"
       - run: echo "version=${{ github.ref_name }}" >> $GITHUB_ENV
       - run: echo "remove v if exsits ${{ github.ref_name//v }}"
-      - run: echo "print last digit: ${{ github.ref_name##*. }}"
+      - run: echo "print last digit = ${{ github.ref_name##*. }}"
       - run: echo "print first part without v = ${{ RELEASE%.* }}"
         env:
           RELEASE: ${{ github.ref_name//v }}
