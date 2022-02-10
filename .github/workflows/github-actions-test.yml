@@ -32,4 +32,8 @@ jobs:
       - run: echo "print first part without v = ${tag%.*}"
       - run: echo "env var = ${{ env.tag }}"
       - run: echo "env var = $tag"
+      - run: |
+          sed -i s/\${version}/${fullversion%.*}/ test
+          sed -i s/\${release}/${fullversion##*.}/ test
+          cat test
       - run: ./run.sh
