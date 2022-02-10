@@ -21,12 +21,14 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - run: echo "github.ref_name is ${{ github.ref_name }}"
-      - run: echo "version=${{ github.ref_name }}" >> $GITHUB_ENV
-      - run: echo "remove v if exsits = ${version//v}"
-      - run: echo "print last digit = ${version##*.}"
-      - run: echo "print first part without v = ${RELEASE%.*}"
-        env:
-          RELEASE: ${version//v}
-      - run: echo "env var = ${{ env.version }}"
-      - run: echo "env var = $version"
+      - run: |
+          echo "tag=${{ github.ref_name }}" >> $GITHUB_ENV
+          echo "fullversion=${tag//v}" >> $GITHUB_ENV
+
+      - run: echo "remove v if exsits = ${tag//v}"
+      - run: echo "print last digit = ${tag##*.}"
+      - run: echo "print first part without v = ${fullversion%.*}"
+      - run: echo "print first part without v = ${tag%.*}"
+      - run: echo "env var = ${{ env.tag }}"
+      - run: echo "env var = $tag"
       - run: ./run.sh
