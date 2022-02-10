@@ -8,6 +8,8 @@ on:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    env:
+      tag: ${{ github.ref_name }}
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -21,9 +23,8 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - run: echo "github.ref_name is ${{ github.ref_name }}"
-      - run: |
-          echo "tag=${{ github.ref_name }}" >> $GITHUB_ENV
- #         echo "fullversion=${tag//v}" >> $GITHUB_ENV
+#      - run: |
+#          echo "tag=${{ github.ref_name }}" >> $GITHUB_ENV
       - run: echo "fullversion=${tag//v}" >> $GITHUB_ENV
       - run: echo "remove v if exsits = ${tag//v}"
       - run: echo "print last digit = ${tag##*.}"
