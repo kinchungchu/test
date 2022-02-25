@@ -1,20 +1,18 @@
-Name:    test
-Version: $VERSION
-Release: $RELEASE
-Summary: Test rpm
+Name:       test
+Version:    $VERSION
+Release:    $RELEASE
+Summary:    Test rpm
 
-License: Test
+License:    Test
+BuildRoot:  %{_tmppath}/%{name}-%{version}-root
+BuildArch:  noarch
 
 %description
 test rpm
 
-%prep
-exit 0
-
-%clean
-
-rm -rf %{buildroot}
-
+#
+# Post-install
+#
 %post
 
 mkdir /opt/bvi/test 
