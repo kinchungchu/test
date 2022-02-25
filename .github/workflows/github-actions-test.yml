@@ -36,8 +36,9 @@ jobs:
         run: |
           sed -i s/\${version}/${fullversion%.*}/ test
           sed -i s/\${release}/${fullversion##*.}/ test
-          sed -i s/\$VERSION/${fullversion%.*}/ test
-          sed -i s/\$RELEASE/${fullversion##*.}/ test
+          sed -i s/\$VERSION/${fullversion%.*}/ rpm/test.spec
+          sed -i s/\$RELEASE/${fullversion##*.}/ rpm/test.spec
           cat test
       - run: cat test
+      - run: cat rpm/test.spec
       - run: ./run.sh
