@@ -42,3 +42,15 @@ jobs:
       - run: cat test
       - run: cat rpm/test.spec
       - run: ./run.sh
+
+      - name: build rpm
+        id: build-rpm
+        uses: naveenrajm7/rpmbuild@c0ba5e8840e67c7a651f2b40485dcbfd15de3e2f
+        with:
+          spec_file: "rpm/test.spec" 
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2.3.1
+        with:
+          name: test RPM
+          path: ${{ steps.build-rpm.outputs.rpm_dir_path }}
