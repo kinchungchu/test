@@ -15,4 +15,9 @@ test rpm
 #
 %post
 
-mkdir /opt/bvi/test 
+mkdir -p /opt/bvi/test2
+
+#
+# File list
+#
+%files
