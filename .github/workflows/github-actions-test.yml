@@ -11,37 +11,39 @@ jobs:
     env:
       tag: ${{ github.ref_name }}
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+#      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+#      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+#      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: echo "github.ref_name is ${{ github.ref_name }}"
+#      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+#      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+#      - name: List files in the repository
+#        run: |
+#          ls ${{ github.workspace }}
+#      - run: echo "🍏 This job's status is ${{ job.status }}."
+#      - run: echo "github.ref_name is ${{ github.ref_name }}"
 #      - run: |
 #          echo "tag=${{ github.ref_name }}" >> $GITHUB_ENV
-      - run: echo "fullversion=${tag//v}" >> $GITHUB_ENV
-      - run: echo "remove v if exsits = ${tag//v}"
+      - name: Remove leading 'v' from tag
+        run: echo "fullversion=${tag//v}" >> $GITHUB_ENV
+#      - run: echo "remove v if exsits = ${tag//v}"
       - run: echo "print last digit = ${tag##*.}"
       - run: echo "print first part without v = ${fullversion%.*}"
       - run: echo "print first part without v = ${tag%.*}"
       - run: echo "env var = ${{ env.tag }}"
       - run: echo "env var = $tag"
       - name: replace variable
+        working-directory: ./rpm/
         run: |
-          sed -i s/\${version}/${fullversion%.*}/ test
-          sed -i s/\${release}/${fullversion##*.}/ test
-          sed -i s/\$VERSION/${fullversion%.*}/ rpm/test.spec
-          sed -i s/\$RELEASE/${fullversion##*.}/ rpm/test.spec
-          cat test
-      - run: cat test
+#          sed -i s/\${version}/${fullversion%.*}/ test
+#          sed -i s/\${release}/${fullversion##*.}/ test
+          sed -i s/\$VERSION/${fullversion%.*}/ test.spec
+          sed -i s/\$RELEASE/${fullversion##*.}/ test.spec
+#          cat test
+#      - run: cat test
       - run: cat rpm/test.spec
-      - run: ./run.sh
+#      - run: ./run.sh
 
       - name: build rpm
         id: build-rpm
