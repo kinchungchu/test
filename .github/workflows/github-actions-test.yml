@@ -32,7 +32,7 @@ jobs:
       - run: echo "print first part without v = ${fullversion%.*}"
       - run: echo "print first part without v = ${tag%.*}"
       - run: echo "env var = ${{ env.tag }}"
-      - run: echo "env var = ${tag}"
+#      - run: echo "env var = ${tag}"
       - name: replace variable
         working-directory: ./rpm/
         run: |
