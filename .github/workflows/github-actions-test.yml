@@ -11,7 +11,7 @@ jobs:
     env:
       tag: ${{ github.ref_name }}
     steps:
-#      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
 #      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
 #      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
@@ -34,7 +34,7 @@ jobs:
       - run: echo "env var = ${{ env.tag }}"
       - run: echo "env var = $tag"
       - name: replace variable
-        working-directory: ./rpm/
+#        working-directory: ./rpm/
         run: |
 #          sed -i s/\${version}/${fullversion%.*}/ test
 #          sed -i s/\${release}/${fullversion##*.}/ test
