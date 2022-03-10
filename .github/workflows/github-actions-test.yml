@@ -25,14 +25,14 @@ jobs:
 #      - run: echo "github.ref_name is ${{ github.ref_name }}"
 #      - run: |
 #          echo "tag=${{ github.ref_name }}" >> $GITHUB_ENV
-      - name: Remove leading 'v' from tag
+      - name: Remove leading v from tag
         run: echo "fullversion=${tag//v}" >> $GITHUB_ENV
 #      - run: echo "remove v if exsits = ${tag//v}"
-      - run: echo "print last digit = ${tag##*.}"
+#      - run: echo "print last digit = ${tag##*.}"
       - run: echo "print first part without v = ${fullversion%.*}"
       - run: echo "print first part without v = ${tag%.*}"
       - run: echo "env var = ${{ env.tag }}"
-#      - run: echo "env var = ${tag}"
+      - run: echo "env var = $tag"
       - name: replace variable
         working-directory: ./rpm/
         run: |
