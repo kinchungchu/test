@@ -1,9 +1,9 @@
 name: GitHub Actions Demo
 
 on:
-  push:
-    tags:
-      - '*'
+  push
+#    tags:
+#      - '*'
 
 jobs:
   Explore-GitHub-Actions:
@@ -25,8 +25,8 @@ jobs:
       - run: echo "github.ref_name is ${{ github.ref_name }}"
 #      - run: |
 #          echo "tag=${{ github.ref_name }}" >> $GITHUB_ENV
-      - name: Remove leading 'v' from tag
-        run: echo "fullversion=${tag//v}" >> $GITHUB_ENV
+#      - name: Remove leading 'v' from tag
+#        run: echo "fullversion=${tag//v}" >> $GITHUB_ENV
       - run: echo "remove v if exsits = ${tag//v}"
       - run: echo "print last digit = ${tag##*.}"
       - run: echo "print first part without v = ${fullversion%.*}"
@@ -36,18 +36,19 @@ jobs:
       - name: replace variable
         working-directory: ./rpm/
         run: |
+          echo "fullversion=${tag//v}" >> $GITHUB_ENV
           sed -i s/\$VERSION/${fullversion%.*}/ test.spec
           sed -i s/\$RELEASE/${fullversion##*.}/ test.spec
       - run: cat rpm/test.spec
 
-      - name: build rpm
-        id: build-rpm
-        uses: naveenrajm7/rpmbuild@c0ba5e8840e67c7a651f2b40485dcbfd15de3e2f
-        with:
-          spec_file: "rpm/test.spec" 
+#      - name: build rpm
+#        id: build-rpm
+#        uses: naveenrajm7/rpmbuild@c0ba5e8840e67c7a651f2b40485dcbfd15de3e2f
+#        with:
+#          spec_file: "rpm/test.spec" 
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2.3.1
-        with:
-          name: test RPM
-          path: ${{ steps.build-rpm.outputs.rpm_dir_path }}
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v2.3.1
+#        with:
+#          name: test RPM
+#          path: ${{ steps.build-rpm.outputs.rpm_dir_path }}
